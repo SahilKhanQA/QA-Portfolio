@@ -1,1 +1,136 @@
 # My-SQL-Database-Testing-
+
+ CREATE DATABASE DemoProjectCV;
+
+-- using demo project CV
+USE DemoProjectCV;
+
+-- Creating table customers
+CREATE TABLE customers (
+ customer_id INT PRIMARY KEY,
+ first_name VARCHAR(50) NOT NULL,
+ last_name VARCHAR(50) NOT NULL,
+ email VARCHAR(150) NOT NULL UNIQUE,
+ phone VARCHAR(20),
+ city VARCHAR(50),
+ country VARCHAR(50),
+ created_at DATETIME NOT NULL,
+ account_status VARCHAR(20) NOT NULL
+);
+
+-- Inserting dummy Data into customers table 
+INSERT INTO customers (customer_id, first_name, last_name, email, phone, city, country, created_at, account_status) VALUES 
+(1, 'Ananya', 'Sharma', 'ananya.sharma1@qa-demo.com', '+971546913810', 'Ajman', 'UAE', '2025-08-21 00:00:00', 'ACTIVE'),
+ (2, 'Ananya', 'Mishra', 'ananya.mishra2@example.com', '+971589254563', 'Bengaluru', 'India', '2025-02-06 00:00:00', 'ACTIVE'), 
+(3, 'Arjun', 'Verma', 'arjun.verma3@example.com', '+971577827638', 'Chennai', 'India', '2025-02-01 00:00:00', 'SUSPENDED'), 
+(4, 'Rohan', 'Mishra', 'rohan.mishra4@testmail.com', '+971539587039', 'Hyderabad', 'India', '2025-10-16 00:00:00', 'ACTIVE'), 
+(5, 'Diya', 'Rao', 'diya.rao5@testmail.com', '+971547295260', 'Sharjah', 'UAE', '2025-08-13 00:00:00', 'ACTIVE'),
+ (6, 'Ananya', 'Patel', 'ananya.patel6@testmail.com', '+971522981052', 'Mumbai', 'India', '2025-12-23 00:00:00', 'SUSPENDED'), 
+(7, 'Aditya', 'Khan', 'aditya.khan7@qa-demo.com', '+971571662963', 'Pune', 'India', '2025-05-12 00:00:00', 'INACTIVE'),
+ (8, 'Arjun', 'Mishra', 'arjun.mishra8@testmail.com', '+971594374605', 'Chennai', 'India', '2026-01-10 00:00:00', 'SUSPENDED'), 
+(9, 'Rohan', 'Patel', 'rohan.patel9@example.com', '+971598753260', 'Ajman', 'UAE', '2025-10-28 00:00:00', 'ACTIVE'), 
+(10, 'Meera', 'Gupta', 'meera.gupta10@testmail.com', '+971547308985', 'Hyderabad', 'India', '2026-01-13 00:00:00', 'ACTIVE'), 
+(11, 'Priya', 'Bansal', 'priya.bansal11@example.com', '+971599949389', 'Delhi', 'India', '2025-03-19 00:00:00', 'SUSPENDED'),
+ (12, 'Diya', 'Mishra', 'diya.mishra12@qa-demo.com', '+971542857966', 'Sharjah', 'UAE', '2026-04-23 00:00:00', 'INACTIVE'), 
+(13, 'Aditya', 'Mishra', 'aditya.mishra13@example.com', '+971553524491', 'Dubai', 'UAE', '2025-08-27 00:00:00', 'ACTIVE'), 
+(14, 'Rahul', 'Chopra', 'rahul.chopra14@testmail.com', '+971518883684', 'Ajman', 'UAE', '2025-11-23 00:00:00', 'ACTIVE'), 
+(15, 'Ishita', 'Chopra', 'ishita.chopra15@qa-demo.com', '+971571586053', 'Sharjah', 'UAE', '2025-10-03 00:00:00', 'ACTIVE'), 
+(16, 'Meera', 'Mishra', 'meera.mishra16@qa-demo.com', '+971545264581', 'Chennai', 'India', '2026-03-19 00:00:00', 'SUSPENDED'), 
+(17, 'Karan', 'Bansal', 'karan.bansal17@example.com', '+971528566572', 'Pune', 'India', '2026-05-25 00:00:00', 'ACTIVE'),
+ (18, 'Aisha', 'Gupta', 'aisha.gupta18@example.com', '+971594214382', 'Sharjah', 'UAE', '2026-03-13 00:00:00', 'SUSPENDED'), 
+(19, 'Arjun', 'Chopra', 'arjun.chopra19@testmail.com', '+971589978790', 'Hyderabad', 'India', '2026-06-30 00:00:00', 'ACTIVE'),
+ (20, 'Nisha', 'Sharma', 'nisha.sharma20@qa-demo.com', '+971525374874', 'Pune', 'India', '2025-10-05 00:00:00', 'ACTIVE');
+
+-- Select query to verify Data insertion 
+
+SELECT * FROM customers; -- Display all the Records 
+
+SELECT * FROM customers where account_status='ACTIVE' AND city='Ajman'; -- Display customers whose status is 'Active' and city is 'Ajman'
+
+SELECT city, COUNT(*) AS customers FROM customers GROUP BY city; -- count the number of customers by city 
+
+Select * from customers where first_name like '_d%'; -- customers name having letter 'd' at second place 
+
+select count(*) from customers where city='delhi'; -- display all customers having city 'delhi'
+
+delete from customers where customer_id=51; -- deletion of customer having customer id '51'
+
+ALTER TABLE customers add Sim_operator VARCHAR(100); -- Altering Table adding new Column 'Sim_Operator'
+
+UPDATE customers SET country='India' where customer_id=1; -- Updating a record whose customer_id is 1
+
+Alter table customers add feedback VARCHAR(100);
+
+ Update customers set feedback='good' where customer_id between 1 and 20;
+ 
+  Update customers set feedback='Bad' where customer_id between 20 and 50;
+
+USE DemoProjectCV;
+
+CREATE TABLE Orders ( -- Creating New Table in same database 
+ Order_id INT PRIMARY KEY,
+ order_Name VARCHAR(50) NOT NULL,
+ order_mode VARCHAR(50) NOT NULL,
+ User_email VARCHAR(150) NOT NULL UNIQUE,
+ city VARCHAR(20) NOT NULL
+);
+
+INSERT INTO Orders (Order_id, order_Name, order_mode, User_email, city) VALUES -- Inserting data into Orders Table 
+
+(1, 'iPhone15 Pro', 'Online', 'user01@example.com','Dubai'),
+
+(2, 'MacBookAir M2', 'Online', 'user02@example.com', 'AbuDhabi'),
+
+(3, 'AirPodsPro', 'Online', 'user03@example.com','Sharjah'),
+
+(4, 'SamsungGalaxy S24', 'Online', 'user04@example.com', 'Ajman'),
+
+(5, 'Dell Monitor', 'Store', 'user05@example.com','Dubai'),
+
+(6, 'Logitech Keyboard', 'Online', 'user06@example.com','AlAin'),
+
+(7, 'Sony Headphones', 'Store', 'user07@example.com', 'RasAl Khaimah'),
+
+(8, 'iPad Air', 'Online', 'user08@example.com', 'Dubai'),
+
+(9, 'Apple Watch', 'Online', 'user09@example.com','Sharjah'),
+
+(10,'USB-CHub', 'Store', 'user10@example.com','Abu Dhabi'),
+
+(11,'HPLaptop', 'Online', 'user11@example.com', 'Dubai'),
+
+(12,'Kindle Paperwhite', 'Online', 'user12@example.com', 'Ajman'),
+
+(13,'JBL Speaker', 'Store', 'user13@example.com','Fujairah'),
+
+(14,'Canon Printer', 'Online', 'user14@example.com', 'Dubai'),
+
+(15,'Anker Charger', 'Online', 'user15@example.com', 'AbuDhabi'),
+
+(16,'Samsung Tablet', 'Store', 'user16@example.com', 'Sharjah'),
+
+(17, 'Mechanical Keyboard', 'Online', 'user17@example.com', 'Dubai'),
+
+(18,'Gaming Mouse', 'Online', 'user18@example.com','Ajman'),
+
+(19,'Webcam HD', 'Store', 'user19@example.com','Al Ain'),
+
+(20,'External SSD 1TB', 'Online', 'user20@example.com','Dubai');
+
+Select * from Orders; -- verifying data insertion 
+
+Select * from Orders where order_mode='online'; -- Where Clause use querying 
+
+Alter table Orders add feedback VARCHAR(100); -- Altering Table Orders adding new column feedback 
+
+Update Orders Set feedback='Good' where Order_id in (1,3,5,7,9,11,13,15,17,19); -- Updating the column feedback by adding values 
+
+Update Orders Set feedback='Bad' where Order_id in (2,4,6,8,10,12,14,16,18,20); -- Updating the column feedback by adding values 
+
+Update Orders set order_name='Webcam' where order_name='Webcam HD'; -- update a record 
+
+Update Orders Set feedback='Good' where feedback is null; -- Updating records that are NULL
+
+Select * from customers as c
+inner join Orders as o
+on c.feedback =o.feedback; -- Inner Join 
