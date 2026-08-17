@@ -1,5 +1,3 @@
-# Database testing Demo Database 
-
 CREATE DATABASE DemoProjectCV;
 
 -- using demo project CV
@@ -41,9 +39,31 @@ INSERT INTO customers (customer_id, first_name, last_name, email, phone, city, c
 (19, 'Arjun', 'Chopra', 'arjun.chopra19@testmail.com', '+971589978790', 'Hyderabad', 'India', '2026-06-30 00:00:00', 'ACTIVE'),
  (20, 'Nisha', 'Sharma', 'nisha.sharma20@qa-demo.com', '+971525374874', 'Pune', 'India', '2025-10-05 00:00:00', 'ACTIVE');
 
--- Select query to verify Data insertion 
+-- Write queries to:
 
 SELECT * FROM customers; -- Display all the Records 
+
+Select * from customers where created_at >= CURDATE()-INTERVAL 1 year; -- Display records that are created 1 year ago 
+
+INSERT INTO customers (customer_id, first_name, last_name, email, phone, city, country, created_at, account_status) VALUES 
+(51, 'Rita', 'Sharma', 'rita.sharma1@qa-demo.com', Null , 'Al ain', 'UAE', '2024-02-20 00:00:00', 'ACTIVE');
+
+Select * from customers where account_status='ACTIVE'; -- Display only active customers.
+
+Select * from customers where country='India'; -- Find customers from a particular country.
+
+Select * from customers where phone is null; -- Find customers whose phone number is NULL.
+
+SELECT email, COUNT(*) AS duplicate_count
+FROM customers
+GROUP BY email
+HAVING COUNT(*) > 1; -- Find duplicate email addresses.
+
+select * from customers where first_name is null; -- Find customers with missing first/last names.
+
+Select * from customers where phone is null; -- Find customers with missing Phone detail.
+
+select * from customers where email Like '%testmail%'; -- Find customers whose email contains testmail.
 
 SELECT * FROM customers where account_status='ACTIVE' AND city='Ajman'; -- Display customers whose status is 'Active' and city is 'Ajman'
 
@@ -137,6 +157,30 @@ on c.customer_id =o.customer_id; -- Inner Join
 
 Alter Table Orders Rename column Order_id to customer_id; -- Change the name of a Column in table Orders 
 
+ALTER TABLE Orders
+ADD COLUMN Amount INT; -- adding new column 
 
+UPDATE Orders
+SET Amount = FLOOR(500 + (RAND() * 501)); -- adding random values to every record 
 
+ALTER TABLE Orders
+ADD COLUMN Currency VARCHAR(20); -- Adding new column currency 
+
+UPDATE Orders
+SET Currency ='AED'; -- Currency to AED 
+ 
+Select * from Orders where Amount>600 ; -- Find products with price > AED 600.
+
+Select * from Orders where Amount between 500 and 600; -- Find products between AED 500–600.
+
+Alter table Orders add column Payment_status Varchar(100); -- adding new column 
+
+Update Orders 
+Set Payment_status = Case Floor (Rand() *3)
+When 0 Then 'Done'
+When 1 Then 'Pending'
+When 2 Then 'Failed'
+END; -- Updating new column with random values 
+
+Select * from Orders where Amount>600 And Payment_status='Pending' And order_mode='Store'; 
 
